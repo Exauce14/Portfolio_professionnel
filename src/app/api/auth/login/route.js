@@ -25,9 +25,9 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Email ou mot de passe incorrect' }, { status: 401 });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email, name: user.name }, SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, SECRET, { expiresIn: '7d' });
 
-    return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email } });
+    return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin } });
   } catch (err) {
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
   }
