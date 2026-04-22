@@ -80,18 +80,16 @@ export default function HomePage() {
               <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Box
                   sx={{
-                    width: { xs: '100%', md: 420 },
-                    maxWidth: 420,
-                    mx: 'auto',
+                    width: { xs: 300, md: 420 },
+                    aspectRatio: '3/4',
                     borderRadius: 3,
                     overflow: 'hidden',
                     boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
                     position: 'relative',
-                    aspectRatio: '3/4',
                   }}
                 >
                   <Image
-                    src="/photo.jpg"
+                    src="/photo.jpeg"
                     alt="Exaucé Woto NGOLO"
                     fill
                     style={{ objectFit: 'cover', objectPosition: 'center top' }}
