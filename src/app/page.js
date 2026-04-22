@@ -114,22 +114,25 @@ export default function HomePage() {
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
                 Étudiant en programmation informatique au <strong>Collège La Cité (Ottawa)</strong>, je me distingue
                 par ma capacité à apprendre de façon autonome et à aller au-delà des exigences des cours.
-                Dans le cadre du cours de Cybersécurité, j&apos;ai notamment réussi à configurer un serveur en HTTPS
-                sur AWS en environnement étudiant, une notion non enseignée et considérée comme bonus, au point
-                que mon professeur m&apos;a demandé de présenter ma solution à toute la classe.
+                Dans le cadre de mon projet intégrateur (application bancaire <strong>Fortivia Bank</strong>),
+                j&apos;ai contribué à des fonctionnalités avancées telles que l&apos;envoi de courriels réels via Nodemailer
+                et l&apos;authentification à double facteur par courriel, des fonctionnalités qui ont particulièrement
+                impressionné mon enseignant.
               </Typography>
 
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
-                Dans le cadre de mon projet intégrateur (application bancaire <strong>Fortivia</strong>),
-                j&apos;ai contribué à des fonctionnalités avancées telles que l&apos;envoi de courriels réels
-                et la double authentification par email, ce qui a tellement impressionné mon professeur
-                qu&apos;il a accepté de me servir de <strong>référence professionnelle</strong>.
+                Dans le cadre de mon cours de <strong>Cybersécurité</strong>, j&apos;ai mené un projet sur les serveurs
+                cloud Amazon (AWS) : déploiement de serveurs EC2 gérés par un équilibreur de charge (<em>load balancer</em>)
+                pour assurer la distribution des requêtes entre les serveurs, génération et installation de certificats
+                SSL/TLS pour sécuriser l&apos;ensemble des échanges en HTTPS. Ces notions, totalement absentes de mon cursus,
+                ont été apprises de façon autodidacte. Mon enseignant, tellement impressionné par le résultat, m&apos;a demandé
+                de présenter ma solution devant toute la classe, ce qui l&apos;a finalement amené à accepter de me servir
+                de <strong>référence professionnelle</strong>.
               </Typography>
 
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
-                Ouvert aux opportunités en développement web fullstack, développement d&apos;applications
-                et en cybersécurité.{' '}
-                <em>Référence disponible sur demande, [Nom du professeur, Collège La Cité].</em>
+                Ouvert aux opportunités en développement web fullstack, développement d&apos;applications et en cybersécurité.{' '}
+                <em>Référence disponible sur demande : Abderrahmane BenMimoune, Professeur au Collège La Cité.</em>
               </Typography>
 
               <Divider sx={{ my: 3 }} />
