@@ -1,9 +1,10 @@
 import sequelize from './db';
-// Les imports suivants sont requis pour que Sequelize synchronise les tables au démarrage
 import './models/User';
 import './models/Project';
 import './models/Testimonial';
 import Project from './models/Project';
+import User from './models/User';
+import bcrypt from 'bcryptjs';
 
 let initialized = false;
 
@@ -41,6 +42,14 @@ export async function initDb() {
   await Project.destroy({ where: {} });
   await sequelize.query("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'Projects'").catch(() => {});
   await Project.bulkCreate(projects);
+
+  const adminExists = await User.findOne({ where: { email: 'admin@admin.com' } });
+  if (!adminExists) {
+    const hashed = await bcrypt.hash('Admin12345', 10);
+    await User.create({ name: 'Admin', email: 'admin@admin.com', password: hashed, isAdmin: true });
+  } else if (!adminExists.isAdmin) {
+    await adminExists.update({ isAdmin: true });
+  }
 
   initialized = true;
 }

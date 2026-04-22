@@ -37,6 +37,15 @@ export const deleteTestimonial = createAsyncThunk('testimonials/delete', async (
   }
 });
 
+export const approveTestimonial = createAsyncThunk('testimonials/approve', async ({ id, approved }, { rejectWithValue }) => {
+  try {
+    const res = await axios.patch(`/api/testimonials/${id}`, { approved });
+    return res.data;
+  } catch (err) {
+    return rejectWithValue('Erreur lors de l\'approbation');
+  }
+});
+
 const testimonialsSlice = createSlice({
   name: 'testimonials',
   initialState: { list: [], loading: false, error: null, success: null },
@@ -61,6 +70,10 @@ const testimonialsSlice = createSlice({
       .addCase(updateTestimonial.rejected, (state, action) => { state.error = action.payload; })
       .addCase(deleteTestimonial.fulfilled, (state, action) => {
         state.list = state.list.filter(t => t.id !== action.payload);
+      })
+      .addCase(approveTestimonial.fulfilled, (state, action) => {
+        const idx = state.list.findIndex(t => t.id === action.payload.id);
+        if (idx !== -1) state.list[idx] = action.payload;
       });
   },
 });

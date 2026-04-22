@@ -8,7 +8,6 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Link from 'next/link';
-import Image from 'next/image';
 import WorkIcon from '@mui/icons-material/Work';
 import CommentIcon from '@mui/icons-material/Comment';
 import EmailIcon from '@mui/icons-material/Email';
@@ -37,67 +36,62 @@ export default function HomePage() {
   return (
     <Box>
         {/* Hero */}
-        <Box sx={{ background: 'linear-gradient(135deg, #1565C0 0%, #1A237E 100%)', color: 'white', py: { xs: 8, md: 12 } }}>
-          <Container maxWidth="lg">
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={7}>
-                <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.75)', letterSpacing: 3 }}>
-                  Étudiant en Programmation Informatique
-                </Typography>
-                <Typography variant="h2" sx={{ fontWeight: 800, mt: 1, mb: 2, fontSize: { xs: '2.2rem', md: '3.2rem' } }}>
-                  Bonjour, je suis<br />
-                  <Box component="span" sx={{ color: '#90CAF9' }}>Exaucé Woto NGOLO</Box>
-                </Typography>
-                <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.85)', mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
-                  Étudiant en programmation informatique au Collège La Cité, passionné par la création de solutions
-                  numériques modernes et la résolution de problèmes techniques complexes.
-                  J&apos;aime apprendre de façon autonome et me dépasser dans chaque projet.
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                  <Button
-                    component={Link}
-                    href="/projects"
-                    variant="contained"
-                    size="large"
-                    startIcon={<WorkIcon />}
-                    sx={{ bgcolor: 'white', color: 'primary.main', '&:hover': { bgcolor: '#E3F2FD' } }}
-                  >
-                    Voir mes projets
-                  </Button>
-                  <Button
-                    component={Link}
-                    href="/testimonials"
-                    variant="outlined"
-                    size="large"
-                    startIcon={<CommentIcon />}
-                    sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.6)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
-                  >
-                    Témoignages
-                  </Button>
-                </Box>
-              </Grid>
+        <Box sx={{ background: 'linear-gradient(135deg, #1565C0 0%, #1A237E 100%)', color: 'white', py: { xs: 8, md: 10 } }}>
+          <Container maxWidth="md">
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 
-              <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Box
-                  sx={{
-                    width: { xs: 300, md: 420 },
-                    aspectRatio: '3/4',
-                    borderRadius: 3,
-                    overflow: 'hidden',
-                    boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
-                    position: 'relative',
-                  }}
+              {/* Photo centrée */}
+              <Box
+                component="img"
+                src="/api/photo"
+                alt="Exaucé Woto NGOLO"
+                sx={{
+                  width: { xs: 260, md: 360 },
+                  height: { xs: 347, md: 480 },
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  borderRadius: 2,
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
+                  mb: 3,
+                  display: 'block',
+                }}
+              />
+
+              <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.75)', letterSpacing: 3 }}>
+                Étudiant en Programmation Informatique
+              </Typography>
+              <Typography variant="h2" sx={{ fontWeight: 800, mt: 1, mb: 2, fontSize: { xs: '2rem', md: '3rem' } }}>
+                Bonjour, je suis<br />
+                <Box component="span" sx={{ color: '#90CAF9' }}>Exaucé Woto NGOLO</Box>
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.85)', mb: 4, lineHeight: 1.8, fontSize: '1.1rem', maxWidth: 650 }}>
+                Étudiant en programmation informatique au Collège La Cité, passionné par la création de solutions
+                numériques modernes et la résolution de problèmes techniques complexes.
+                J&apos;aime apprendre de façon autonome et me dépasser dans chaque projet.
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Button
+                  component={Link}
+                  href="/projects"
+                  variant="contained"
+                  size="large"
+                  startIcon={<WorkIcon />}
+                  sx={{ bgcolor: 'white', color: 'primary.main', '&:hover': { bgcolor: '#E3F2FD' } }}
                 >
-                  <Image
-                    src="/photo.jpeg"
-                    alt="Exaucé Woto NGOLO"
-                    fill
-                    style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                    priority
-                  />
-                </Box>
-              </Grid>
-            </Grid>
+                  Voir mes projets
+                </Button>
+                <Button
+                  component={Link}
+                  href="/testimonials"
+                  variant="outlined"
+                  size="large"
+                  startIcon={<CommentIcon />}
+                  sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.6)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
+                >
+                  Témoignages
+                </Button>
+              </Box>
+            </Box>
           </Container>
         </Box>
 
@@ -117,25 +111,28 @@ export default function HomePage() {
               <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 2 }}>À propos</Typography>
               <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5, mb: 3 }}>Qui suis-je ?</Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
                 Étudiant en programmation informatique au <strong>Collège La Cité (Ottawa)</strong>, je me distingue
                 par ma capacité à apprendre de façon autonome et à aller au-delà des exigences des cours.
-                J&apos;ai notamment réussi à configurer un serveur en HTTPS sur AWS en environnement étudiant
-                — une notion non enseignée et considérée comme bonus — au point que mon professeur m&apos;a demandé
-                de présenter ma solution à toute la classe.
+                Dans le cadre de mon projet intégrateur (application bancaire <strong>Fortivia Bank</strong>),
+                j&apos;ai contribué à des fonctionnalités avancées telles que l&apos;envoi de courriels réels via Nodemailer
+                et l&apos;authentification à double facteur par courriel, des fonctionnalités qui ont particulièrement
+                impressionné mon enseignant.
               </Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
-                Dans le cadre de mon projet intégrateur (application bancaire <strong>Fortivia</strong>),
-                j&apos;ai contribué à des fonctionnalités avancées telles que l&apos;envoi de courriels réels
-                et la double authentification par email, ce qui a tellement impressionné mon professeur
-                qu&apos;il a accepté de me servir de <strong>référence professionnelle</strong>.
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
+                Dans le cadre de mon cours de <strong>Cybersécurité</strong>, j&apos;ai mené un projet sur les serveurs
+                cloud Amazon (AWS) : déploiement de serveurs EC2 gérés par un équilibreur de charge (<em>load balancer</em>)
+                pour assurer la distribution des requêtes entre les serveurs, génération et installation de certificats
+                SSL/TLS pour sécuriser l&apos;ensemble des échanges en HTTPS. Ces notions, totalement absentes de mon cursus,
+                ont été apprises de façon autodidacte. Mon enseignant, tellement impressionné par le résultat, m&apos;a demandé
+                de présenter ma solution devant toute la classe, ce qui l&apos;a finalement amené à accepter de me servir
+                de <strong>référence professionnelle</strong>.
               </Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
-                Ouvert aux opportunités en développement web fullstack, développement d&apos;applications
-                et en cybersécurité.{' '}
-                <em>Référence disponible sur demande — [Nom du professeur, Collège La Cité].</em>
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
+                Ouvert aux opportunités en développement web fullstack, développement d&apos;applications et en cybersécurité.{' '}
+                <em>Référence disponible sur demande : Abderrahmane BenMimoune, Professeur au Collège La Cité.</em>
               </Typography>
 
               <Divider sx={{ my: 3 }} />

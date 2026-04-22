@@ -7,6 +7,7 @@ const Testimonial = sequelize.define('Testimonial', {
   message: { type: DataTypes.TEXT, allowNull: false },
   rating: { type: DataTypes.INTEGER, defaultValue: 5 },
   userId: { type: DataTypes.INTEGER },
+  approved: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
 
 export default Testimonial;
