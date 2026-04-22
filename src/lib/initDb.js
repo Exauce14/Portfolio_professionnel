@@ -43,10 +43,10 @@ export async function initDb() {
   await sequelize.query("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'Projects'").catch(() => {});
   await Project.bulkCreate(projects);
 
-  const adminExists = await User.findOne({ where: { email: 'exaucengolo519@gmail.com' } });
+  const adminExists = await User.findOne({ where: { email: 'admin@admin.com' } });
   if (!adminExists) {
-    const hashed = await bcrypt.hash('Admin@Portfolio2026', 10);
-    await User.create({ name: 'Exaucé', email: 'exaucengolo519@gmail.com', password: hashed, isAdmin: true });
+    const hashed = await bcrypt.hash('Admin12345', 10);
+    await User.create({ name: 'Admin', email: 'admin@admin.com', password: hashed, isAdmin: true });
   } else if (!adminExists.isAdmin) {
     await adminExists.update({ isAdmin: true });
   }
