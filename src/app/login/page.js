@@ -67,7 +67,7 @@ export default function LoginPage() {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               error={!!errors.email}
               helperText={errors.email}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
               autoComplete="email"
             />
             <TextField
@@ -77,7 +77,7 @@ export default function LoginPage() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               error={!!errors.password}
               helperText={errors.password}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
               autoComplete="current-password"
             />
             <Button

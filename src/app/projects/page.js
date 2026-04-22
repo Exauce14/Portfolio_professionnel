@@ -68,7 +68,7 @@ export default function ProjectsPage() {
             const techs = project.technologies.split(',').map((t) => t.trim());
             const Icon = projectIcons[index % projectIcons.length];
             return (
-              <Grid item xs={12} md={6} lg={4} key={project.id}>
+              <Grid size={{ xs: 12, md: 6, lg: 4 }} key={project.id}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.2s, box-shadow 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' } }}>
                   <Box sx={{ bgcolor: 'primary.main', height: 130, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Icon sx={{ fontSize: 60, color: 'rgba(255,255,255,0.85)' }} />

@@ -76,7 +76,7 @@ export default function TestimonialsPage() {
 
           <Grid container spacing={3}>
             {list.map((t, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={t.id}>
+              <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={t.id}>
                 <Card sx={{
                   height: '100%', display: 'flex', flexDirection: 'column',
                   transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-3px)', boxShadow: '0 6px 20px rgba(0,0,0,0.1)' },

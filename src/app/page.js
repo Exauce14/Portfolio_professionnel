@@ -106,8 +106,8 @@ export default function HomePage() {
 
         {/* À propos + Compétences */}
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          <Grid container spacing={6} alignItems="flex-start">
-            <Grid item xs={12} md={6}>
+          <Grid container spacing={6} sx={{ alignItems: 'flex-start' }}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 2 }}>À propos</Typography>
               <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5, mb: 3 }}>Qui suis-je ?</Typography>
 
@@ -147,7 +147,7 @@ export default function HomePage() {
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 2 }}>Compétences</Typography>
               <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5, mb: 3 }}>Technologies maîtrisées</Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

@@ -74,7 +74,7 @@ export default function RegisterPage() {
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               error={!!errors.name}
               helperText={errors.name}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
             />
             <TextField
               label="Email"
@@ -83,7 +83,7 @@ export default function RegisterPage() {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               error={!!errors.email}
               helperText={errors.email}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
             />
             <TextField
               label="Mot de passe"
@@ -92,7 +92,7 @@ export default function RegisterPage() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               error={!!errors.password}
               helperText={errors.password}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
             />
             <TextField
               label="Confirmer le mot de passe"
@@ -101,7 +101,7 @@ export default function RegisterPage() {
               onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword}
-              FormHelperTextProps={{ sx: { color: 'error.main' } }}
+              slotProps={{ formHelperText: { sx: { color: 'error.main' } } }}
             />
             <Button
               type="submit"
