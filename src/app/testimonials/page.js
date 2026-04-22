@@ -27,18 +27,19 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function TestimonialsPage() {
   const dispatch = useDispatch();
-  const { list, loading } = useSelector((state) => state.testimonials);
-  const { user } = useSelector((state) => state.auth);
-  const isAdmin = user?.isAdmin === true;
+  const { list, loading }  = useSelector((state) => state.testimonials);
+  const { user }           = useSelector((state) => state.auth);
+  const isAdmin            = user?.isAdmin === true;
 
+  // Charge les témoignages au montage — l'API filtre selon le rôle (cookie JWT)
   useEffect(() => { dispatch(fetchTestimonials()); }, [dispatch]);
 
-  const handleDelete = (id) => {
+  const handleDelete  = (id) => {
     if (confirm('Voulez-vous vraiment supprimer ce témoignage ?')) dispatch(deleteTestimonial(id));
   };
-
   const handleApprove = (id, approved) => dispatch(approveTestimonial({ id, approved }));
 
+  // Palette de couleurs pour les avatars — cycle sur l'index pour varier les teintes
   const colors = ['primary.main', 'secondary.main', '#2E7D32', '#E65100', '#6A1B9A'];
 
   return (
@@ -49,6 +50,7 @@ export default function TestimonialsPage() {
             <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 2 }}>Avis</Typography>
             <Typography variant="h3" fontWeight={700} mt={0.5}>Témoignages</Typography>
             <Typography color="text.secondary" mt={1}>Ce que les gens disent de mon travail</Typography>
+            {/* Badge visible uniquement pour l'admin pour indiquer le mode de modération */}
             {isAdmin && (
               <Chip label="Mode Administrateur" color="warning" sx={{ mt: 1.5, fontWeight: 700 }} />
             )}
@@ -80,11 +82,13 @@ export default function TestimonialsPage() {
                 <Card sx={{
                   height: '100%', display: 'flex', flexDirection: 'column',
                   transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-3px)', boxShadow: '0 6px 20px rgba(0,0,0,0.1)' },
+                  // Bordure orange pour signaler à l'admin les témoignages en attente de validation
                   border: isAdmin && !t.approved ? '2px solid #FF9800' : 'none',
                 }}>
                   <CardContent sx={{ flex: 1 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        {/* Avatar généré depuis la première lettre du nom */}
                         <Avatar sx={{ bgcolor: colors[index % colors.length], width: 48, height: 48, fontWeight: 700 }}>
                           {t.name.charAt(0).toUpperCase()}
                         </Avatar>
@@ -95,6 +99,7 @@ export default function TestimonialsPage() {
                           </Typography>
                         </Box>
                       </Box>
+                      {/* Badge de statut visible uniquement par l'admin */}
                       {isAdmin && (
                         <Chip
                           label={t.approved ? 'Approuvé' : 'En attente'}
@@ -110,6 +115,7 @@ export default function TestimonialsPage() {
                   </CardContent>
 
                   <CardActions sx={{ justifyContent: 'flex-end', px: 2, pb: 1, flexWrap: 'wrap', gap: 0.5 }}>
+                    {/* Boutons d'approbation réservés à l'admin */}
                     {isAdmin && !t.approved && (
                       <Tooltip title="Approuver">
                         <IconButton onClick={() => handleApprove(t.id, true)} size="small" color="success">
@@ -124,6 +130,7 @@ export default function TestimonialsPage() {
                         </IconButton>
                       </Tooltip>
                     )}
+                    {/* Modifier et supprimer accessibles à tout utilisateur connecté */}
                     {user && (
                       <>
                         <Tooltip title="Modifier">

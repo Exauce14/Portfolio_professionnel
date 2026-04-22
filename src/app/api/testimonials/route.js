@@ -3,6 +3,9 @@ import { initDb } from '@/lib/initDb';
 import { verifyAdmin } from '@/lib/authHelper';
 import { getAllTestimonials, createTestimonial } from '@/lib/controllers/testimonialsController';
 
+// GET /api/testimonials
+// Admin : reçoit tous les témoignages (approuvés et en attente)
+// Utilisateur normal : reçoit uniquement les témoignages approuvés
 export async function GET(request) {
   try {
     await initDb();
@@ -14,6 +17,8 @@ export async function GET(request) {
   }
 }
 
+// POST /api/testimonials — crée un témoignage
+// Si c'est l'admin qui poste, il est automatiquement approuvé
 export async function POST(request) {
   try {
     await initDb();

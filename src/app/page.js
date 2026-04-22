@@ -12,41 +12,44 @@ import WorkIcon from '@mui/icons-material/Work';
 import CommentIcon from '@mui/icons-material/Comment';
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
+
+// Données statiques — la page d'accueil n'a pas besoin de BDD
 const skills = [
   { name: 'JavaScript / TypeScript', level: 95 },
-  { name: 'React / Next.js', level: 95 },
-  { name: 'Node.js / Express', level: 95 },
-  { name: 'C# / .NET', level: 95 },
-  { name: 'Java / JavaFX', level: 95 },
-  { name: 'C++', level: 95 },
-  { name: 'Kotlin', level: 95 },
-  { name: 'Swift (iOS)', level: 95 },
-  { name: 'SQL / MySQL / SQLite', level: 95 },
+  { name: 'React / Next.js',         level: 95 },
+  { name: 'Node.js / Express',       level: 95 },
+  { name: 'C# / .NET',               level: 95 },
+  { name: 'Java / JavaFX',           level: 95 },
+  { name: 'C++',                     level: 95 },
+  { name: 'Kotlin',                  level: 95 },
+  { name: 'Swift (iOS)',             level: 95 },
+  { name: 'SQL / MySQL / SQLite',    level: 95 },
   { name: 'Material UI / Tailwind CSS', level: 95 },
-  { name: 'Redux Toolkit', level: 95 },
-  { name: 'EJS / Templating', level: 95 },
-  { name: 'Linux / AWS Cloud', level: 95 },
+  { name: 'Redux Toolkit',           level: 95 },
+  { name: 'EJS / Templating',        level: 95 },
+  { name: 'Linux / AWS Cloud',       level: 95 },
   { name: 'Patrons de conception (MVC, POO)', level: 95 },
-  { name: 'Git / GitHub', level: 95 },
+  { name: 'Git / GitHub',            level: 95 },
 ];
 
+// Chips affichés dans la bande de technologies
 const badges = ['Next.js', 'React', 'Node.js', 'C#', 'Java', 'C++', 'Kotlin', 'Swift', 'MySQL', 'AWS', 'Redux', 'Git', 'MUI'];
 
 export default function HomePage() {
   return (
     <Box>
-        {/* Hero */}
+        {/* ── Section Hero ── */}
         <Box sx={{ background: 'linear-gradient(135deg, #1565C0 0%, #1A237E 100%)', color: 'white', py: { xs: 8, md: 10 } }}>
           <Container maxWidth="md">
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 
-              {/* Photo centrée */}
+              {/* Photo servie par l'API pour bénéficier du cache HTTP 24h */}
               <Box
                 component="img"
                 src="/api/photo"
                 alt="Exaucé Woto NGOLO"
                 sx={{
-                  width: { xs: 260, md: 360 },
+                  width:  { xs: 260, md: 360 },
                   height: { xs: 347, md: 480 },
                   objectFit: 'cover',
                   objectPosition: 'center top',
@@ -95,7 +98,7 @@ export default function HomePage() {
           </Container>
         </Box>
 
-        {/* Badges */}
+        {/* ── Bande de badges technologiques ── */}
         <Box sx={{ bgcolor: 'white', py: 2.5, borderBottom: '1px solid #E0E0E0' }}>
           <Container maxWidth="lg">
             <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -104,7 +107,7 @@ export default function HomePage() {
           </Container>
         </Box>
 
-        {/* À propos + Compétences */}
+        {/* ── Section À propos + Compétences ── */}
         <Container maxWidth="lg" sx={{ py: 8 }}>
           <Grid container spacing={6} sx={{ alignItems: 'flex-start' }}>
             <Grid size={{ xs: 12, md: 6 }}>
@@ -154,9 +157,10 @@ export default function HomePage() {
                 {skills.map((skill) => (
                   <Box key={skill.name}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                      <Typography variant="body2" fontWeight={600}>{skill.name}</Typography>
-                      <Typography variant="body2" color="primary" fontWeight={700}>{skill.level}%</Typography>
+                      <Typography variant="body2" fontWeight={600}>{skill.level}%</Typography>
+                      <Typography variant="body2" color="primary" fontWeight={700}>{skill.name}</Typography>
                     </Box>
+                    {/* Barre de progression déterminée par le niveau de la compétence */}
                     <LinearProgress
                       variant="determinate"
                       value={skill.level}
@@ -169,7 +173,7 @@ export default function HomePage() {
           </Grid>
         </Container>
 
-        {/* CTA */}
+        {/* ── Section Call-to-Action ── */}
         <Box sx={{ bgcolor: '#E8EAF6', py: 8 }}>
           <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
             <Typography variant="h4" fontWeight={700} mb={2}>Intéressé par mon profil ?</Typography>

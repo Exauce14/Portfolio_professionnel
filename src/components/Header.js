@@ -20,17 +20,19 @@ import Chip from '@mui/material/Chip';
 import MenuIcon from '@mui/icons-material/Menu';
 import CodeIcon from '@mui/icons-material/Code';
 
+// Liens de navigation communs au desktop et au menu mobile
 const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/projects', label: 'Projets' },
+  { href: '/',             label: 'Accueil' },
+  { href: '/projects',     label: 'Projets' },
   { href: '/testimonials', label: 'Témoignages' },
 ];
 
+// Barre de navigation sticky — adapte son contenu selon l'état de connexion
 export default function Header() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const pathname = usePathname();
-  const { user } = useSelector((state) => state.auth);
+  const dispatch  = useDispatch();
+  const router    = useRouter();
+  const pathname  = usePathname();
+  const { user }  = useSelector((state) => state.auth);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleLogout = () => {
@@ -51,7 +53,7 @@ export default function Header() {
           Exauce Ngolo
         </Typography>
 
-        {/* Desktop nav */}
+        {/* Navigation desktop (masquée sur mobile) */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, flexGrow: 1 }}>
           {navLinks.map((link) => (
             <Button
@@ -60,7 +62,8 @@ export default function Header() {
               href={link.href}
               sx={{
                 color: 'white',
-                fontWeight: pathname === link.href ? 700 : 400,
+                // Soulignement blanc sur la route active pour indiquer la page courante
+                fontWeight:   pathname === link.href ? 700 : 400,
                 borderBottom: pathname === link.href ? '2px solid white' : '2px solid transparent',
                 borderRadius: 0,
                 px: 1.5,
@@ -71,7 +74,7 @@ export default function Header() {
           ))}
         </Box>
 
-        {/* Auth area */}
+        {/* Zone auth desktop : affiche le nom de l'utilisateur ou les boutons connexion/inscription */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
           {user ? (
             <>
@@ -94,12 +97,13 @@ export default function Header() {
           )}
         </Box>
 
-        {/* Mobile menu */}
+        {/* Bouton hamburger visible uniquement sur mobile */}
         <IconButton sx={{ display: { md: 'none' }, ml: 'auto', color: 'white' }} onClick={() => setDrawerOpen(true)}>
           <MenuIcon />
         </IconButton>
       </Toolbar>
 
+      {/* Drawer mobile — s'ouvre depuis la droite */}
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box sx={{ width: 240, pt: 2 }}>
           <List>

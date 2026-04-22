@@ -8,6 +8,7 @@ import {
   deleteTestimonial,
 } from '@/lib/controllers/testimonialsController';
 
+// GET /api/testimonials/[id] — retourne un témoignage par son ID
 export async function GET(_request, { params }) {
   try {
     await initDb();
@@ -20,6 +21,7 @@ export async function GET(_request, { params }) {
   }
 }
 
+// PUT /api/testimonials/[id] — modifie le contenu (nom, message, note)
 export async function PUT(request, { params }) {
   try {
     await initDb();
@@ -34,6 +36,7 @@ export async function PUT(request, { params }) {
   }
 }
 
+// PATCH /api/testimonials/[id] — bascule approved (admin uniquement)
 export async function PATCH(request, { params }) {
   try {
     await initDb();
@@ -50,6 +53,7 @@ export async function PATCH(request, { params }) {
   }
 }
 
+// DELETE /api/testimonials/[id] — supprime définitivement un témoignage
 export async function DELETE(_request, { params }) {
   try {
     await initDb();

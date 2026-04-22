@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Thunk : charge tous les témoignages visibles par l'utilisateur connecté
+// L'API filtre automatiquement selon son rôle (admin voit tout, user voit les approuvés)
 export const fetchTestimonials = createAsyncThunk('testimonials/fetchAll', async (_, { rejectWithValue }) => {
   try {
     const res = await axios.get('/api/testimonials');
@@ -10,6 +12,7 @@ export const fetchTestimonials = createAsyncThunk('testimonials/fetchAll', async
   }
 });
 
+// Thunk : soumet un nouveau témoignage
 export const addTestimonial = createAsyncThunk('testimonials/add', async (data, { rejectWithValue }) => {
   try {
     const res = await axios.post('/api/testimonials', data);
@@ -19,6 +22,7 @@ export const addTestimonial = createAsyncThunk('testimonials/add', async (data, 
   }
 });
 
+// Thunk : modifie un témoignage existant (PUT remplace tous les champs modifiables)
 export const updateTestimonial = createAsyncThunk('testimonials/update', async ({ id, data }, { rejectWithValue }) => {
   try {
     const res = await axios.put(`/api/testimonials/${id}`, data);
@@ -28,6 +32,7 @@ export const updateTestimonial = createAsyncThunk('testimonials/update', async (
   }
 });
 
+// Thunk : supprime un témoignage — retourne l'id pour le retirer de la liste locale
 export const deleteTestimonial = createAsyncThunk('testimonials/delete', async (id, { rejectWithValue }) => {
   try {
     await axios.delete(`/api/testimonials/${id}`);
@@ -37,6 +42,7 @@ export const deleteTestimonial = createAsyncThunk('testimonials/delete', async (
   }
 });
 
+// Thunk : bascule l'approbation d'un témoignage (PATCH partiel, admin seulement)
 export const approveTestimonial = createAsyncThunk('testimonials/approve', async ({ id, approved }, { rejectWithValue }) => {
   try {
     const res = await axios.patch(`/api/testimonials/${id}`, { approved });
@@ -54,23 +60,31 @@ const testimonialsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTestimonials.pending, (state) => { state.loading = true; })
-      .addCase(fetchTestimonials.fulfilled, (state, action) => { state.loading = false; state.list = action.payload; })
-      .addCase(fetchTestimonials.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
+      .addCase(fetchTestimonials.pending,    (state) => { state.loading = true; })
+      .addCase(fetchTestimonials.fulfilled,  (state, action) => { state.loading = false; state.list = action.payload; })
+      .addCase(fetchTestimonials.rejected,   (state, action) => { state.loading = false; state.error = action.payload; })
+
+      // Insère en tête de liste pour que le nouveau témoignage apparaisse immédiatement
       .addCase(addTestimonial.fulfilled, (state, action) => {
         state.list.unshift(action.payload);
         state.success = 'Témoignage ajouté avec succès !';
       })
       .addCase(addTestimonial.rejected, (state, action) => { state.error = action.payload; })
+
+      // Remplace l'entrée modifiée dans la liste en cherchant par id
       .addCase(updateTestimonial.fulfilled, (state, action) => {
         const idx = state.list.findIndex(t => t.id === action.payload.id);
         if (idx !== -1) state.list[idx] = action.payload;
         state.success = 'Témoignage modifié avec succès !';
       })
       .addCase(updateTestimonial.rejected, (state, action) => { state.error = action.payload; })
+
+      // Retire le témoignage supprimé de la liste sans recharger depuis l'API
       .addCase(deleteTestimonial.fulfilled, (state, action) => {
         state.list = state.list.filter(t => t.id !== action.payload);
       })
+
+      // Met à jour le statut d'approbation directement dans la liste
       .addCase(approveTestimonial.fulfilled, (state, action) => {
         const idx = state.list.findIndex(t => t.id === action.payload.id);
         if (idx !== -1) state.list[idx] = action.payload;

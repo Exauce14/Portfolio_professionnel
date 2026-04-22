@@ -19,10 +19,11 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function AddTestimonialPage() {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const router   = useRouter();
   const { loading, error, success } = useSelector((state) => state.testimonials);
-  const { user } = useSelector((state) => state.auth);
-  const [form, setForm] = useState({ name: user?.name || '', message: '', rating: 5 });
+  const { user }                    = useSelector((state) => state.auth);
+  // Pré-remplit le nom avec celui du compte connecté pour éviter une saisie inutile
+  const [form,   setForm]   = useState({ name: user?.name || '', message: '', rating: 5 });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -30,12 +31,13 @@ export default function AddTestimonialPage() {
   }, [dispatch]);
 
   useEffect(() => {
+    // Redirige vers la liste après 1,5s pour laisser lire le message de succès
     if (success) setTimeout(() => router.push('/testimonials'), 1500);
   }, [success, router]);
 
   const validate = () => {
     const e = {};
-    if (!form.name || form.name.trim().length < 2) e.name = 'Le nom doit contenir au moins 2 caractères';
+    if (!form.name    || form.name.trim().length    < 2)  e.name    = 'Le nom doit contenir au moins 2 caractères';
     if (!form.message || form.message.trim().length < 10) e.message = 'Le message doit contenir au moins 10 caractères';
     return e;
   };
@@ -45,6 +47,7 @@ export default function AddTestimonialPage() {
     const e2 = validate();
     if (Object.keys(e2).length > 0) { setErrors(e2); return; }
     setErrors({});
+    // userId lie le témoignage au compte connecté (utile pour une future fonctionnalité de profil)
     dispatch(addTestimonial({ ...form, userId: user?.id }));
   };
 
@@ -59,7 +62,7 @@ export default function AddTestimonialPage() {
             <Typography variant="h5" fontWeight={700} gutterBottom>Laisser un témoignage</Typography>
             <Typography color="text.secondary" sx={{ mb: 3 }}>Partagez votre expérience avec mon travail</Typography>
 
-            {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+            {error   && <Alert severity="error"   sx={{ mb: 2 }}>{error}</Alert>}
             {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
 
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -72,6 +75,7 @@ export default function AddTestimonialPage() {
               />
               <Box>
                 <Typography variant="body2" fontWeight={600} gutterBottom>Note *</Typography>
+                {/* v || 1 empêche de mettre une note à 0 étoiles */}
                 <Rating value={form.rating} onChange={(_, v) => setForm({ ...form, rating: v || 1 })} size="large" />
               </Box>
               <TextField

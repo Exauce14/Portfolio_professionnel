@@ -17,16 +17,19 @@ import Avatar from '@mui/material/Avatar';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const router   = useRouter();
   const { loading, error, user } = useSelector((state) => state.auth);
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form,   setForm]   = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    // Si déjà connecté (ex: retour arrière), redirige immédiatement vers l'accueil
     if (user) router.push('/');
+    // Nettoie les messages d'erreur Redux quand on quitte la page
     return () => { dispatch(clearMessages()); };
   }, [user, router, dispatch]);
 
+  // Validation locale avant d'envoyer la requête — évite un aller-retour inutile vers l'API
   const validate = () => {
     const e = {};
     if (!form.email) e.email = "L'email est requis";
@@ -57,6 +60,7 @@ export default function LoginPage() {
             </Typography>
           </Box>
 
+          {/* Erreur renvoyée par l'API (identifiants incorrects) */}
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

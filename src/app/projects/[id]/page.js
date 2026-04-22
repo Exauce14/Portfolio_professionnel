@@ -36,12 +36,14 @@ const techColors = {
 const projectIcons = [AccountBalanceIcon, SecurityIcon, PhoneAndroidIcon];
 
 export default function ProjectDetailPage() {
-  const { id } = useParams();
+  const { id }  = useParams();
   const dispatch = useDispatch();
   const { current, loading } = useSelector((state) => state.projects);
 
+  // Charge le projet dès que l'id est disponible dans l'URL
   useEffect(() => { if (id) dispatch(fetchProjectById(id)); }, [id, dispatch]);
 
+  // (id - 1) car les ids commencent à 1, les index de tableau à 0
   const Icon = current ? projectIcons[(current.id - 1) % projectIcons.length] : null;
 
   return (
@@ -64,6 +66,7 @@ export default function ProjectDetailPage() {
               <Divider sx={{ my: 3 }} />
 
               <Typography variant="overline" color="primary" fontWeight={700}>Description</Typography>
+              {/* whiteSpace: pre-line respecte les sauts de ligne \n dans la description */}
               <Typography variant="body1" color="text.secondary" sx={{ mt: 1, mb: 4, lineHeight: 1.9, whiteSpace: 'pre-line' }}>
                 {current.description}
               </Typography>
@@ -77,6 +80,7 @@ export default function ProjectDetailPage() {
               </Box>
 
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                {/* Les boutons GitHub et Demo sont conditionnels — tous les projets n'ont pas de démo */}
                 {current.github && (
                   <Button component="a" href={current.github} target="_blank" rel="noopener noreferrer" variant="outlined" startIcon={<GitHubIcon />}>
                     Voir sur GitHub

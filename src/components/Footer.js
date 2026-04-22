@@ -8,6 +8,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
+// Pied de page commun à toutes les pages — liens sociaux et copyright
 export default function Footer() {
   return (
     <Box component="footer" sx={{ bgcolor: '#1A237E', color: 'white', py: 4, mt: 'auto' }}>

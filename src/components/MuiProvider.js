@@ -2,13 +2,14 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// Thème MUI global — centralise les couleurs, la typographie et les surcharges de composants
 const theme = createTheme({
   palette: {
     mode: 'light',
-    primary: { main: '#1565C0' },
-    secondary: { main: '#E53935' },
+    primary:    { main: '#1565C0' },            // bleu principal
+    secondary:  { main: '#E53935' },            // rouge accent
     background: { default: '#F5F7FA', paper: '#FFFFFF' },
-    text: { primary: '#1A1A2E', secondary: '#5A6A7A' },
+    text:       { primary: '#1A1A2E', secondary: '#5A6A7A' },
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -20,6 +21,7 @@ const theme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
+        // Supprime le uppercase automatique de MUI et force un style cohérent
         root: { textTransform: 'none', fontWeight: 600, borderRadius: 8 },
       },
     },
@@ -29,6 +31,7 @@ const theme = createTheme({
       },
     },
     MuiTextField: {
+      // Tous les TextField sont outlined et pleine largeur par défaut
       defaultProps: { variant: 'outlined', fullWidth: true },
     },
   },
@@ -37,6 +40,7 @@ const theme = createTheme({
 export default function MuiProvider({ children }) {
   return (
     <ThemeProvider theme={theme}>
+      {/* CssBaseline normalise les styles CSS entre navigateurs */}
       <CssBaseline />
       {children}
     </ThemeProvider>

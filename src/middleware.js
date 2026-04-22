@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 
-// Pages publiques (sans connexion)
-const PUBLIC_ONLY = ['/login', '/register']; // redirige vers / si déjà connecté
-const ALWAYS_PUBLIC = ['/']; // toujours accessible
+// Routes accessibles uniquement sans connexion (redirige vers / si déjà connecté)
+const PUBLIC_ONLY = ['/login', '/register'];
+// Routes toujours accessibles, connecté ou non
+const ALWAYS_PUBLIC = ['/'];
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
+  // Laisse passer les fichiers internes Next.js et toutes les routes API sans vérification
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -36,6 +38,7 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
+// Applique le middleware à toutes les routes sauf les fichiers statiques Next.js
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };

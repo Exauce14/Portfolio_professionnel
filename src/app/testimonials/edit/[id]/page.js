@@ -19,21 +19,24 @@ import SaveIcon from '@mui/icons-material/Save';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function EditTestimonialPage() {
-  const { id } = useParams();
+  const { id }   = useParams();
   const dispatch = useDispatch();
-  const router = useRouter();
+  const router   = useRouter();
   const { loading, error, success } = useSelector((state) => state.testimonials);
-  const [form, setForm] = useState({ name: '', message: '', rating: 5 });
-  const [errors, setErrors] = useState({});
+  const [form,     setForm]     = useState({ name: '', message: '', rating: 5 });
+  const [errors,   setErrors]   = useState({});
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
+    // Charge le témoignage existant directement via axios plutôt que Redux
+    // car current dans le store projets n'est pas disponible ici
     const load = async () => {
       try {
         const res = await axios.get(`/api/testimonials/${id}`);
         setForm({ name: res.data.name, message: res.data.message, rating: res.data.rating });
       } catch (err) {
         console.error(err);
+        // Si le témoignage n'existe pas (supprimé entre-temps), retourne à la liste
         router.push('/testimonials');
       } finally {
         setFetching(false);
@@ -49,7 +52,7 @@ export default function EditTestimonialPage() {
 
   const validate = () => {
     const e = {};
-    if (!form.name || form.name.trim().length < 2) e.name = 'Le nom doit contenir au moins 2 caractères';
+    if (!form.name    || form.name.trim().length    < 2)  e.name    = 'Le nom doit contenir au moins 2 caractères';
     if (!form.message || form.message.trim().length < 10) e.message = 'Le message doit contenir au moins 10 caractères';
     return e;
   };
@@ -62,6 +65,7 @@ export default function EditTestimonialPage() {
     dispatch(updateTestimonial({ id, data: form }));
   };
 
+  // Affiche le spinner pendant le chargement initial des données
   if (fetching) {
     return (
       <ProtectedRoute>
@@ -82,7 +86,7 @@ export default function EditTestimonialPage() {
           <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
             <Typography variant="h5" fontWeight={700} gutterBottom>Modifier le témoignage</Typography>
 
-            {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+            {error   && <Alert severity="error"   sx={{ mb: 2 }}>{error}</Alert>}
             {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
 
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>

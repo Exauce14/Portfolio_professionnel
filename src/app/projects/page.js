@@ -20,6 +20,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
+// Associe chaque technologie à une couleur MUI pour les chips visuels
 const techColors = {
   'React': 'primary', 'Next.js': 'default', 'Node.js': 'success',
   'Express.js': 'warning', 'Express': 'warning', 'MySQL': 'error', 'SQLite': 'secondary',
@@ -34,12 +35,14 @@ const techColors = {
   'Sequelize': 'primary',
 };
 
+// Icônes associées aux projets dans l'ordre de leur id (cycle si plus de 3 projets)
 const projectIcons = [AccountBalanceIcon, SecurityIcon, PhoneAndroidIcon];
 
 export default function ProjectsPage() {
   const dispatch = useDispatch();
   const { list, loading, error } = useSelector((state) => state.projects);
 
+  // Charge les projets dès le montage du composant
   useEffect(() => { dispatch(fetchProjects()); }, [dispatch]);
 
   return (
@@ -65,8 +68,9 @@ export default function ProjectsPage() {
 
         <Grid container spacing={3}>
           {list.map((project, index) => {
+            // Sépare la chaîne CSV des technologies en tableau pour les chips
             const techs = project.technologies.split(',').map((t) => t.trim());
-            const Icon = projectIcons[index % projectIcons.length];
+            const Icon  = projectIcons[index % projectIcons.length];
             return (
               <Grid size={{ xs: 12, md: 6, lg: 4 }} key={project.id}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.2s, box-shadow 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' } }}>
@@ -75,6 +79,7 @@ export default function ProjectsPage() {
                   </Box>
                   <CardContent sx={{ flex: 1 }}>
                     <Typography variant="h6" fontWeight={700} gutterBottom>{project.title}</Typography>
+                    {/* Troncature CSS à 3 lignes pour uniformiser la hauteur des cartes */}
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 2, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       {project.description}
                     </Typography>

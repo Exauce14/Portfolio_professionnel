@@ -17,28 +17,30 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const router   = useRouter();
   const { loading, error, success, user } = useSelector((state) => state.auth);
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [form,   setForm]   = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    // Si déjà connecté, redirige vers l'accueil
     if (user) router.push('/');
     return () => { dispatch(clearMessages()); };
   }, [user, router, dispatch]);
 
   useEffect(() => {
+    // Après inscription réussie, redirige vers /login après 2s pour laisser lire le message
     if (success) setTimeout(() => router.push('/login'), 2000);
   }, [success, router]);
 
   const validate = () => {
     const e = {};
-    if (!form.name || form.name.trim().length < 2) e.name = 'Le nom doit contenir au moins 2 caractères';
-    if (!form.email) e.email = "L'email est requis";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email invalide';
-    if (!form.password) e.password = 'Le mot de passe est requis';
-    else if (form.password.length < 6) e.password = 'Au moins 6 caractères requis';
-    if (form.password !== form.confirmPassword) e.confirmPassword = 'Les mots de passe ne correspondent pas';
+    if (!form.name || form.name.trim().length < 2)  e.name = 'Le nom doit contenir au moins 2 caractères';
+    if (!form.email)                                 e.email = "L'email est requis";
+    else if (!/\S+@\S+\.\S+/.test(form.email))      e.email = 'Email invalide';
+    if (!form.password)                              e.password = 'Le mot de passe est requis';
+    else if (form.password.length < 6)               e.password = 'Au moins 6 caractères requis';
+    if (form.password !== form.confirmPassword)      e.confirmPassword = 'Les mots de passe ne correspondent pas';
     return e;
   };
 
@@ -47,6 +49,7 @@ export default function RegisterPage() {
     const e2 = validate();
     if (Object.keys(e2).length > 0) { setErrors(e2); return; }
     setErrors({});
+    // N'envoie pas confirmPassword à l'API — c'est une validation purement locale
     dispatch(registerUser({ name: form.name, email: form.email, password: form.password }));
   };
 
@@ -64,7 +67,7 @@ export default function RegisterPage() {
             </Typography>
           </Box>
 
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+          {error   && <Alert severity="error"   sx={{ mb: 2 }}>{error}</Alert>}
           {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

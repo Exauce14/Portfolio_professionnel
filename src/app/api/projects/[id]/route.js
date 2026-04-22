@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { initDb } from '@/lib/initDb';
 import { getProjectById } from '@/lib/controllers/projectsController';
 
+// GET /api/projects/[id] — retourne un projet par son ID, 404 s'il n'existe pas
 export async function GET(_request, { params }) {
   try {
     await initDb();

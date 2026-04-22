@@ -6,8 +6,11 @@ import Project from './models/Project';
 import User from './models/User';
 import bcrypt from 'bcryptjs';
 
+// Garde-fou : initialise la BDD une seule fois par démarrage du serveur
 let initialized = false;
 
+// Données de départ — les projets sont recréés à chaque démarrage pour
+// garantir que le contenu du portfolio est toujours synchronisé avec le code
 const projects = [
   {
     id: 1,
@@ -37,12 +40,17 @@ const projects = [
 
 export async function initDb() {
   if (initialized) return;
+
+  // Synchronise les modèles avec la BDD (crée ou modifie les tables si besoin)
   await sequelize.sync({ alter: true });
 
+  // Réinitialise les projets à chaque démarrage pour rester cohérent avec le code
   await Project.destroy({ where: {} });
+  // Remet l'auto-incrément à 0 pour que les IDs restent prévisibles (1, 2, 3)
   await sequelize.query("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'Projects'").catch(() => {});
   await Project.bulkCreate(projects);
 
+  // Crée le compte admin s'il n'existe pas, ou s'assure qu'il a bien le rôle admin
   const adminExists = await User.findOne({ where: { email: 'admin@admin.com' } });
   if (!adminExists) {
     const hashed = await bcrypt.hash('Admin12345', 10);
