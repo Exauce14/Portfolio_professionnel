@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio - Exauce Ngolo
 
-## Getting Started
+Portfolio personnel développé avec **Next.js 16**, **Redux Toolkit**, **Axios**, **Sequelize** et **SQLite**.
 
-First, run the development server:
+## Technologies utilisées
+
+| Technologie | Rôle |
+|---|---|
+| Next.js 16 (App Router) | Framework fullstack |
+| Redux Toolkit | Gestion d'état global |
+| Axios | Requêtes HTTP frontend → backend |
+| Sequelize + SQLite | ORM + base de données |
+| Tailwind CSS | Styles CSS utilitaires |
+| bcryptjs | Hashage des mots de passe |
+| jsonwebtoken | Authentification JWT |
+
+## Fonctionnalités
+
+- **Page d'accueil** — présentation, barres de compétences
+- **Inscription / Connexion** — formulaires avec validation en rouge
+- **Projets** — liste + page détail par ID (données depuis Next API)
+- **Témoignages** — liste, ajout, modification, suppression
+- **Protection des routes** — middleware Next.js + Redux (JWT en cookie)
+- **Navigation responsive** — header mobile avec menu burger
+- **Footer** — liens GitHub, LinkedIn, Email
+
+## Installation et démarrage
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera disponible sur [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+> La base de données SQLite est créée automatiquement au premier démarrage avec 3 projets prédéfinis.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure du projet
 
-## Learn More
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── auth/login/          → POST - Connexion JWT
+│   │   ├── auth/register/       → POST - Inscription
+│   │   ├── projects/            → GET tous les projets
+│   │   ├── projects/[id]/       → GET un projet par ID
+│   │   ├── testimonials/        → GET liste + POST nouveau
+│   │   └── testimonials/[id]/   → GET + PUT + DELETE
+│   ├── login/                   → Page connexion
+│   ├── register/                → Page inscription
+│   ├── projects/                → Liste des projets
+│   ├── projects/[id]/           → Détail d'un projet
+│   ├── testimonials/            → Liste des témoignages
+│   ├── testimonials/add/        → Formulaire ajout
+│   └── testimonials/edit/[id]/  → Formulaire modification
+├── components/
+│   ├── Header.js                → Navigation + déconnexion
+│   ├── Footer.js                → Liens réseaux sociaux
+│   ├── ProtectedRoute.js        → Garde de route côté client
+│   └── ReduxProvider.js         → Provider Redux + hydratation localStorage
+├── store/
+│   ├── authSlice.js             → État authentification (login/logout/register)
+│   ├── projectsSlice.js         → État projets
+│   └── testimonialsSlice.js     → État témoignages (CRUD)
+├── lib/
+│   ├── db.js                    → Configuration Sequelize + SQLite
+│   ├── initDb.js                → Initialisation BDD + données seed
+│   └── models/                  → User, Project, Testimonial
+└── middleware.js                → Protection des routes par cookie JWT
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Modèles de base de données
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **User** — id, name, email, password (hashé bcrypt)
+- **Project** — id, title, description, technologies, github, image
+- **Testimonial** — id, name, message, rating (1-5), userId
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Protection des routes
 
-## Deploy on Vercel
+Toutes les pages sauf `/login` et `/register` nécessitent une connexion. La protection est double :
+1. **Middleware Next.js** (`src/middleware.js`) — vérifie le cookie JWT côté serveur avant le rendu
+2. **Composant `ProtectedRoute`** — redirection côté client si Redux ne détecte pas de session active
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Auteur
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Exauce Ngolo**  
+Email : exaucengolo519@gmail.com  
+GitHub : [github.com/exaucengolo519](https://github.com/exaucengolo519)
