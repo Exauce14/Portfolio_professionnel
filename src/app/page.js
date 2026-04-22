@@ -114,9 +114,9 @@ export default function HomePage() {
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
                 Étudiant en programmation informatique au <strong>Collège La Cité (Ottawa)</strong>, je me distingue
                 par ma capacité à apprendre de façon autonome et à aller au-delà des exigences des cours.
-                J&apos;ai notamment réussi à configurer un serveur en HTTPS sur AWS en environnement étudiant
-                — une notion non enseignée et considérée comme bonus — au point que mon professeur m&apos;a demandé
-                de présenter ma solution à toute la classe.
+                Dans le cadre du cours de Cybersécurité, j&apos;ai notamment réussi à configurer un serveur en HTTPS
+                sur AWS en environnement étudiant, une notion non enseignée et considérée comme bonus, au point
+                que mon professeur m&apos;a demandé de présenter ma solution à toute la classe.
               </Typography>
 
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
@@ -129,7 +129,7 @@ export default function HomePage() {
               <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
                 Ouvert aux opportunités en développement web fullstack, développement d&apos;applications
                 et en cybersécurité.{' '}
-                <em>Référence disponible sur demande — [Nom du professeur, Collège La Cité].</em>
+                <em>Référence disponible sur demande, [Nom du professeur, Collège La Cité].</em>
               </Typography>
 
               <Divider sx={{ my: 3 }} />
