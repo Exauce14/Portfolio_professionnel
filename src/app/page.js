@@ -8,7 +8,6 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Link from 'next/link';
-import Image from 'next/image';
 import WorkIcon from '@mui/icons-material/Work';
 import CommentIcon from '@mui/icons-material/Comment';
 import EmailIcon from '@mui/icons-material/Email';
@@ -79,23 +78,19 @@ export default function HomePage() {
 
               <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Box
+                  component="img"
+                  src="/photo.jpeg"
+                  alt="Exaucé Woto NGOLO"
                   sx={{
-                    width: { xs: 300, md: 420 },
-                    aspectRatio: '3/4',
+                    width: { xs: 280, md: 400 },
+                    height: { xs: 373, md: 533 },
+                    objectFit: 'cover',
+                    objectPosition: 'center top',
                     borderRadius: 3,
-                    overflow: 'hidden',
                     boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
-                    position: 'relative',
+                    display: 'block',
                   }}
-                >
-                  <Image
-                    src="/photo.jpeg"
-                    alt="Exaucé Woto NGOLO"
-                    fill
-                    style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                    priority
-                  />
-                </Box>
+                />
               </Grid>
             </Grid>
           </Container>
