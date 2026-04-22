@@ -36,63 +36,62 @@ export default function HomePage() {
   return (
     <Box>
         {/* Hero */}
-        <Box sx={{ background: 'linear-gradient(135deg, #1565C0 0%, #1A237E 100%)', color: 'white', py: { xs: 8, md: 12 } }}>
-          <Container maxWidth="lg">
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={7}>
-                <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.75)', letterSpacing: 3 }}>
-                  Étudiant en Programmation Informatique
-                </Typography>
-                <Typography variant="h2" sx={{ fontWeight: 800, mt: 1, mb: 2, fontSize: { xs: '2.2rem', md: '3.2rem' } }}>
-                  Bonjour, je suis<br />
-                  <Box component="span" sx={{ color: '#90CAF9' }}>Exaucé Woto NGOLO</Box>
-                </Typography>
-                <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.85)', mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
-                  Étudiant en programmation informatique au Collège La Cité, passionné par la création de solutions
-                  numériques modernes et la résolution de problèmes techniques complexes.
-                  J&apos;aime apprendre de façon autonome et me dépasser dans chaque projet.
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                  <Button
-                    component={Link}
-                    href="/projects"
-                    variant="contained"
-                    size="large"
-                    startIcon={<WorkIcon />}
-                    sx={{ bgcolor: 'white', color: 'primary.main', '&:hover': { bgcolor: '#E3F2FD' } }}
-                  >
-                    Voir mes projets
-                  </Button>
-                  <Button
-                    component={Link}
-                    href="/testimonials"
-                    variant="outlined"
-                    size="large"
-                    startIcon={<CommentIcon />}
-                    sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.6)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
-                  >
-                    Témoignages
-                  </Button>
-                </Box>
-              </Grid>
+        <Box sx={{ background: 'linear-gradient(135deg, #1565C0 0%, #1A237E 100%)', color: 'white', py: { xs: 8, md: 10 } }}>
+          <Container maxWidth="md">
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 
-              <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Box
-                  component="img"
-                  src="/photo.jpeg"
-                  alt="Exaucé Woto NGOLO"
-                  sx={{
-                    width: { xs: 280, md: 400 },
-                    height: { xs: 373, md: 533 },
-                    objectFit: 'cover',
-                    objectPosition: 'center top',
-                    borderRadius: 3,
-                    boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
-                    display: 'block',
-                  }}
-                />
-              </Grid>
-            </Grid>
+              {/* Photo centrée */}
+              <Box
+                component="img"
+                src="/photo.jpeg"
+                alt="Exaucé Woto NGOLO"
+                sx={{
+                  width: { xs: 200, md: 260 },
+                  height: { xs: 200, md: 260 },
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  borderRadius: '50%',
+                  border: '5px solid rgba(255,255,255,0.5)',
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
+                  mb: 3,
+                }}
+              />
+
+              <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.75)', letterSpacing: 3 }}>
+                Étudiant en Programmation Informatique
+              </Typography>
+              <Typography variant="h2" sx={{ fontWeight: 800, mt: 1, mb: 2, fontSize: { xs: '2rem', md: '3rem' } }}>
+                Bonjour, je suis<br />
+                <Box component="span" sx={{ color: '#90CAF9' }}>Exaucé Woto NGOLO</Box>
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.85)', mb: 4, lineHeight: 1.8, fontSize: '1.1rem', maxWidth: 650 }}>
+                Étudiant en programmation informatique au Collège La Cité, passionné par la création de solutions
+                numériques modernes et la résolution de problèmes techniques complexes.
+                J&apos;aime apprendre de façon autonome et me dépasser dans chaque projet.
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Button
+                  component={Link}
+                  href="/projects"
+                  variant="contained"
+                  size="large"
+                  startIcon={<WorkIcon />}
+                  sx={{ bgcolor: 'white', color: 'primary.main', '&:hover': { bgcolor: '#E3F2FD' } }}
+                >
+                  Voir mes projets
+                </Button>
+                <Button
+                  component={Link}
+                  href="/testimonials"
+                  variant="outlined"
+                  size="large"
+                  startIcon={<CommentIcon />}
+                  sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.6)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
+                >
+                  Témoignages
+                </Button>
+              </Box>
+            </Box>
           </Container>
         </Box>
 
