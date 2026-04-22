@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { initDb } from '@/lib/initDb';
-import Project from '@/lib/models/Project';
+import { getProjectById } from '@/lib/controllers/projectsController';
 
 export async function GET(_request, { params }) {
   try {
     await initDb();
     const { id } = await params;
-    const project = await Project.findByPk(id);
+    const project = await getProjectById(id);
     if (!project) return NextResponse.json({ error: 'Projet non trouvé' }, { status: 404 });
     return NextResponse.json(project);
   } catch (err) {
