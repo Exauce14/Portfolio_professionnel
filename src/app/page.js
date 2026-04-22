@@ -43,11 +43,11 @@ export default function HomePage() {
               {/* Photo centrée */}
               <Box
                 component="img"
-                src="/photo.jpeg"
+                src="/api/photo"
                 alt="Exaucé Woto NGOLO"
                 sx={{
-                  width: { xs: 220, md: 300 },
-                  height: { xs: 293, md: 400 },
+                  width: { xs: 260, md: 360 },
+                  height: { xs: 347, md: 480 },
                   objectFit: 'cover',
                   objectPosition: 'center top',
                   borderRadius: 2,
