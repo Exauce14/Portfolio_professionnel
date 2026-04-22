@@ -46,14 +46,14 @@ export default function HomePage() {
                 src="/photo.jpeg"
                 alt="Exaucé Woto NGOLO"
                 sx={{
-                  width: { xs: 200, md: 260 },
-                  height: { xs: 200, md: 260 },
+                  width: { xs: 220, md: 300 },
+                  height: { xs: 293, md: 400 },
                   objectFit: 'cover',
                   objectPosition: 'center top',
-                  borderRadius: '50%',
-                  border: '5px solid rgba(255,255,255,0.5)',
+                  borderRadius: 2,
                   boxShadow: '0 12px 40px rgba(0,0,0,0.4)',
                   mb: 3,
+                  display: 'block',
                 }}
               />
 
