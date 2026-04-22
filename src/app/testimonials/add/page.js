@@ -69,7 +69,6 @@ export default function AddTestimonialPage() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 error={!!errors.name}
                 helperText={errors.name}
-                FormHelperTextProps={{ sx: { color: 'error.main' } }}
               />
               <Box>
                 <Typography variant="body2" fontWeight={600} gutterBottom>Note *</Typography>
@@ -83,7 +82,6 @@ export default function AddTestimonialPage() {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 error={!!errors.message}
                 helperText={errors.message}
-                FormHelperTextProps={{ sx: { color: 'error.main' } }}
                 placeholder="Partagez votre expérience..."
               />
               <Button

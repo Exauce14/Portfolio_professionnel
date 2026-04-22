@@ -111,7 +111,7 @@ export default function HomePage() {
               <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 2 }}>À propos</Typography>
               <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5, mb: 3 }}>Qui suis-je ?</Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
                 Étudiant en programmation informatique au <strong>Collège La Cité (Ottawa)</strong>, je me distingue
                 par ma capacité à apprendre de façon autonome et à aller au-delà des exigences des cours.
                 Dans le cadre de mon projet intégrateur (application bancaire <strong>Fortivia Bank</strong>),
@@ -120,7 +120,7 @@ export default function HomePage() {
                 impressionné mon enseignant.
               </Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
                 Dans le cadre de mon cours de <strong>Cybersécurité</strong>, j&apos;ai mené un projet sur les serveurs
                 cloud Amazon (AWS) : déploiement de serveurs EC2 gérés par un équilibreur de charge (<em>load balancer</em>)
                 pour assurer la distribution des requêtes entre les serveurs, génération et installation de certificats
@@ -130,7 +130,7 @@ export default function HomePage() {
                 de <strong>référence professionnelle</strong>.
               </Typography>
 
-              <Typography color="text.secondary" paragraph sx={{ lineHeight: 1.8 }}>
+              <Typography color="text.secondary" sx={{ lineHeight: 1.8, mb: 2 }}>
                 Ouvert aux opportunités en développement web fullstack, développement d&apos;applications et en cybersécurité.{' '}
                 <em>Référence disponible sur demande : Abderrahmane BenMimoune, Professeur au Collège La Cité.</em>
               </Typography>
